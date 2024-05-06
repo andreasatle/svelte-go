@@ -21,4 +21,4 @@
   });
 </script>
 
-<h1>Response: {message}</h1>
+<h1 class="text-blue-600">Response: {message}</h1>
