@@ -6,6 +6,8 @@ import (
 )
 
 func LoadRoutes(r *gin.Engine) {
-	r.GET("/ping", handlers.Ping)
+	api := r.Group("/api")
+	api.GET("/ping", handlers.Ping)
+	
 	r.GET("/", handlers.Frontend)
 }

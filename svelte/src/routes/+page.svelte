@@ -10,7 +10,7 @@
     //} catch (error) {
     //  data = { message: "Error fetching data" };
     //}
-    const response = await fetch("https://localhost/ping");
+    const response = await fetch("https://localhost/api/ping");
     if (!response.ok) {
       message = "Error fetching data";
     } else {
