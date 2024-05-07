@@ -26,10 +26,11 @@ var DB *gorm.DB
 
 // ConnectDB connects to the database
 func ConnectDB(config Config) {
+	var err error
 	dsn := fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?charset=utf8mb4&parseTime=True&loc=Local", config.User, config.Password, config.Host, config.Port, config.Name)
-	DB, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("Failed to connect database: %v", err)
 	}
-	DB.AutoMigrate(&User{})
+	//DB.AutoMigrate(&User{})
 }

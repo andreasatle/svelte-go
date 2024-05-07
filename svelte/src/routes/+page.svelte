@@ -1,24 +1,40 @@
 <script>
   import { onMount } from "svelte";
 
-  let message;
+  let pingResponse = "";
+  let users = [];
 
-  onMount(async () => {
-    //try {
-    //  const response = await fetch("http://localhost:8080/ping2");
-    //  data = await response.json();
-    //} catch (error) {
-    //  data = { message: "Error fetching data" };
-    //}
+  // fetchPing updates the `pingResponse` variable with the response from the server
+  async function fetchPing() {
     const response = await fetch("https://localhost/api/ping");
     if (!response.ok) {
-      message = "Error fetching data";
+      pingResponse = "Error fetching ping data";
     } else {
       const data = await response.json();
-      message = data.message;
+      pingResponse = data.message;
     }
-    console.log(message);
-  });
+  }
+  async function fetchUsers() {
+    const response = await fetch("https://localhost/api/users");
+    if (!response.ok) {
+      users = [];
+    } else {
+      const data = await response.json();
+      console.log(data);
+      users = data;
+      console.log(users);
+    }
+  }
+
+  async function fetchAll() {
+    const promise1 = fetchPing();
+    const promise2 = fetchUsers();
+    await Promise.all([promise1, promise2]);
+  }
+  onMount(fetchAll);
 </script>
 
-<h1 class="text-blue-600">Response: {message}</h1>
+<h1 class="text-blue-600">Response: {pingResponse}</h1>
+{#each users as user}
+<p>{user.Name}</p>
+{/each}
