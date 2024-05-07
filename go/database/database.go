@@ -32,5 +32,5 @@ func ConnectDB(config Config) {
 	if err != nil {
 		log.Fatalf("Failed to connect database: %v", err)
 	}
-	//DB.AutoMigrate(&User{})
+	DB.AutoMigrate(&User{})
 }

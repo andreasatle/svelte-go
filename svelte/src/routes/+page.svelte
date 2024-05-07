@@ -19,10 +19,7 @@
     if (!response.ok) {
       users = [];
     } else {
-      const data = await response.json();
-      console.log(data);
-      users = data;
-      console.log(users);
+      users = await response.json();
     }
   }
 
